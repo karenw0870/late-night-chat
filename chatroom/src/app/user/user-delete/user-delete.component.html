@@ -1,0 +1,71 @@
+
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/user/index">
+    <i class="fa fa-top fa-chevron-left text-white"></i>users
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" 
+    [routerLink]="['/user/detail', user.id]">
+    <i class="fa fa-top fa-user text-white"></i>user
+  </button>
+</div>
+
+<i class="fa fa-hdr fa-user text-info"></i>
+<h1 class="text-danger">Delete User</h1>
+<div class="container">
+  <div class="card border-danger card-text mb-3">
+    <div class="card-header bg-danger">
+      <h4 class="text-white">Delete {{user.username}}'s record?</h4>
+    </div>   
+    <div class="card-body">
+      <h5 class="card-title text-dark">Record will not be deleted if:</h5>
+      <ul class="text-dark">
+        <li><h6>This is the only SuperAdmin record</h6></li>
+        <li><h6>This user is an admin of a current Group</h6></li>
+      </ul>
+      <div class="form-group row">
+        <label for="username" class="col-sm-3 col-form-label right">User Id:</label>
+        <p class="col-sm-9 form-control-plaintext">{{user.id}}</p>
+      </div>
+      <div class="form-group row">
+        <label for="username" class="col-sm-3 col-form-label right">User name:</label>
+        <p class="col-sm-9 form-control-plaintext">{{user.username}}</p>
+      </div>
+      <div class="form-group row">
+        <label for="email" class="col-sm-3 col-form-label right">Email:</label>
+        <p class="col-sm-9 form-control-plaintext">{{user.email}}</p>
+      </div>
+      <div class="row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="super">Super Admin
+            </label>
+            <br/>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="group">Group Admin
+            </label>
+            <br/>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="general">General User
+            </label>
+            <br/>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-6 center">
+        <button type="submit" class="btn btn-secondary" routerLink="/user">cancel</button>
+    </div>
+    <div class="col-6 center">
+        <button type="submit" class="btn btn-danger" (click)="deleteUser()">delete user</button>
+    </div>
+  </div>
+</div> <!-- end container div -->

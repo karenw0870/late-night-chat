@@ -1,0 +1,72 @@
+
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/user">
+    <i class="fa fa-top fa-chevron-left text-white"></i>users
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" 
+    [routerLink]="['/user/edit', user.id]">
+    <i class="fa fa-top fa-pencil text-white"></i>update record
+  </button>
+</div>
+  
+<div class="row">
+  <div class="col-8">
+    <h1>User Details</h1>
+  </div>
+  <div class="col-4">
+    <img src="{{user.imagepath}}" class="user-icon-lg" alt="user icon"/>
+  </div>
+</div>
+  
+<div class="container">
+  <!-- USER INFO -->
+  <div class="card border-primary mb-3">
+    <div class="card-header bg-light"><h4>User Information</h4></div>
+    <div class="card-body">
+      <fieldset>
+        <legend class="text-secondary">Login Information</legend>
+        <div class="form-group row">
+          <label for="username" class="col-sm-3 col-form-label right">User name:</label>
+          <p class="col-sm-9 form-control-plaintext">{{user.username}}</p>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label right">Email:</label>
+          <p class="col-sm-9 form-control-plaintext">{{user.email}}</p>
+        </div>
+      </fieldset>
+  
+      <fieldset class="form-group">
+        <legend class="text-secondary">Security Level</legend>
+        <div class="form-group row">
+          <label for="securitylevel" class="col-sm-3 col-form-label right">Classification:</label>
+          <p class="col-sm-9 form-control-plaintext">{{user.securitylevel}}</p>
+        </div>
+      </fieldset>
+
+    </div>
+  </div>
+
+  <!-- GROUPS -->
+  <div class="card border-primary mb-3">
+    <div class="card-header bg-light"><h4>Groups as Admin or Channel Member</h4></div>
+    <div class="card-body">
+      <fieldset>
+        <ul *ngFor="let g of user.groups">
+          <dt>{{g.groupname}} ({{g.groupadminidname}})</dt>
+          <span *ngFor="let c of user.channels">
+            <dd>{{c.channelname}}</dd>
+          </span>
+        </ul>
+        <p *ngIf="user.groups.length == 0">
+          You are not an Admin, Group Assitant or a Member of any groups
+        </p>
+      </fieldset>
+
+    </div>
+  </div>
+
+</div> <!-- end container div -->
+  

@@ -1,0 +1,109 @@
+
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/user">
+    <i class="fa fa-top fa-chevron-left text-white"></i>users
+  </button>
+</div>
+
+<div class="row">
+  <div class="col-8">
+    <h1 *ngIf="userid != ''">Edit User</h1>
+    <h1 *ngIf="userid == ''">Add New User</h1>
+  </div>
+  <div class="col-4">
+    <img src="{{user.imagepath}}" class="user-icon-lg" alt="user icon"/>
+  </div>
+</div>
+
+<div class="container">
+    <div *ngIf="result!=''" class="alert-danger">{{result}}</div>
+
+    <div class="px-5">
+      <input hidden [(ngModel)]="user.id">
+      <fieldset class="input-group">
+        <legend>User Information</legend>
+        <div class="form-group row">
+          <label for="username" class="col-sm-3 col-form-label right">User name:</label>
+          <div class="col-sm-9">
+              <input *ngIf="isSuper" [(ngModel)]="user.username" name="username" class="form-control">
+              <input *ngIf="!isSuper" [(ngModel)]="user.username" name="username" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label right">Email:</label>
+          <div class="col-sm-9">
+              <input type="email" [(ngModel)]="user.email" name="email" class="form-control">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset *ngIf="isSuper" class="form-group">
+        <legend>Security Level</legend>
+        <div class="row">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="super">Super Admin
+            </label>
+            <br/>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="group">Group Admin
+            </label>
+            <br/>
+          </div>
+          <div class="form-check">
+            <label class="form-check-label">
+              <input type="radio" class="col-form-label" [(ngModel)]="user.securitylevel" value="general">General User
+            </label>
+            <br/>
+          </div>
+        </div>
+      </fieldset>
+
+      <hr *ngIf="userid != ''"/>
+      <div class="form-file" *ngIf="userid != ''">
+        <input type="file" class="form-file-input" (change)="onImageSelect($event)"
+            id="uploadimage" name="uploadimage">
+        
+      </div>
+
+      <br/>
+      <div class="center" *ngIf="!changepassword">
+        <button class="btn btn-secondary" (click)="changePassword()">change password</button>
+      </div>
+      <div *ngIf="changepassword">
+        <hr/>
+        <fieldset>
+          <legend><span *ngIf="userid != ''">Change </span>Password</legend>
+          <div class="form-group row">
+            <label for="enterpassword" class="col-sm-3 col-form-label right">Password:</label>
+            <div class="col-sm-9">
+                <input type="password" autocomplete="new-password" [(ngModel)]="enterpassword" name="enterpassword" class="form-control">
+            </div>
+          </div>
+          <div class="form-group row">
+              <label for="confirmpassword" class="col-sm-3 col-form-label right">Confirm password:</label>
+            <div class="col-sm-9">
+                <input type="password" [(ngModel)]="confirmpassword" name="confirmpassword" class="form-control">
+            </div>
+          </div>
+        </fieldset>
+        <div *ngIf="userid != ''" class="center mb-2">
+            <button class="btn btn-secondary" (click)="cancelChange()">cancel password change</button>
+          </div>
+      </div>
+
+      <hr/>
+      <div class="center pb-5">
+        <button type="submit" class="btn btn-success" (click)="uploadImage()">upload image &amp; save</button>
+      </div>
+      
+    </div>
+  
+  </div> <!-- end container div -->
+
+  

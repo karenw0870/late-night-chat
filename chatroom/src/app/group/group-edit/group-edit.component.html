@@ -1,0 +1,55 @@
+
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" 
+  [routerLink]="['/group/detail', group.id]">
+    <i class="fa fa-top fa-chevron-left text-white"></i>group
+  </button>
+</div>
+
+<i class="fa fa-hdr fa-comments text-warning"></i>
+<h1 *ngIf="groupid > 0">Edit Group</h1>
+<h1 *ngIf="!groupid > 0">Add New Group</h1>
+<br/>
+<div *ngIf="result!=''" class="alert-danger">{{result}}</div>
+<br/>
+
+<div class="container">
+    <div class="px-5">
+      <input hidden [(ngModel)]="group.id">
+  
+      <fieldset>
+        <legend>Group Details</legend>
+        <div class="form-group row">
+          <label for="groupname" class="col-sm-3 col-form-label right">Group name:</label>
+          <div class="col-sm-9">
+              <input [(ngModel)]="group.groupname" name="groupname" class="form-control">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-sm-3 col-form-label right">Description:</label>
+          <div class="col-sm-9">
+              <input type="text" [(ngModel)]="group.description" name="description" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-group row" *ngIf="isSuper" >
+          <label for="groupadminid" class="col-sm-3 col-form-label right">Group Admin:</label>
+          <div class="col-sm-9">
+            <select class="form-control" [(ngModel)]="group.groupadminid" name="groupadminid">
+              <option value="0"></option>
+              <option *ngFor="let user of userselect" value="{{user.id}}">{{user.username}}</option>
+            </select>
+          </div>
+        </div>
+      </fieldset>
+  
+      <div class="center pb-5">
+        <button type="submit" class="btn btn-success" (click)="updateGroup()">save group</button>
+      </div>
+      
+    </div>
+  
+  </div> <!-- end container div -->

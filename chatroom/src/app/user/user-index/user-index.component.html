@@ -1,0 +1,45 @@
+
+<div class="btn-group" data-toggle="buttons">
+    <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+      <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+    </button>
+    <button *ngIf="isGroup" type="button" class="btn btn-sm btn-primary left" routerLink="/user/edit">
+      <i class="fa fa-top fa-user-plus text-white"></i>add user
+    </button>
+  </div>
+
+    <h1>Registered Users</h1>
+
+    <br/>
+    <div class="row bg-light bold">
+        <div class="col-sm-3 center">Username</div>
+        <div class="col-sm-5 center">Email</div>
+        <div class="col-sm-2 center">Security</div>
+        <div class="col-sm-2 center"> </div>
+    </div>
+    <br/>    
+    <div *ngFor="let user of users; index as i" class="mx-3">
+      <div class="row">
+        <div class="col-2">
+            <img [routerLink]="['/user/detail', user.id]" src="{{user.imagepath}}" class="point user-icon-sm"/>
+        </div>
+        <div class="col-8">
+          <a [routerLink]="['/user/detail', user.id]">
+            <div class="row">
+                <div class="col-sm-3">{{user.username}}</div>
+                <div class="col-sm-6">{{user.email}}</div>
+                <div class="col-sm-3">{{user.securitylevel}}</div>
+            </div>
+          </a>
+        </div>
+        <div class="col-2 right">
+          <button *ngIf="user.id==currUserId || isGroup" class="btn btn-secondary btn-sm" [routerLink]="['/user/edit', user.id]">
+              <i class="fa fa-pencil text-white fa-sm"></i></button>
+          <button *ngIf="user.id != currUserId && isSuper" class="btn btn-danger btn-sm" [routerLink]="['/user/delete', user.id]">
+            <i class="fa fa-trash text-white fa-sm"></i></button>
+        </div>
+      </div>
+      <hr/>
+    </div>
+
+

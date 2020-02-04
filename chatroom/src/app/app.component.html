@@ -1,0 +1,21 @@
+<nav class="navbar navbar-dark bg-dark">
+  <div class="nav navbar-nav">
+    <span class="navbar-brand" *ngIf="!isAuth">Late Night Chat</span>
+    <a *ngIf="isAuth" class="navbar-brand" routerLink="/dashboard">
+      Late Night Chat
+    </a>
+  </div>
+  <div class="nav navbar-nav navbar-right" id="navbarColor02">
+    <div>
+      <div class="nav-item text-white right">{{userName}}</div>
+      <div class="nav-item right">
+          <a *ngIf="isAuth" (click)="signOut()" class="text-white sign-out">
+            Sign out
+            <i class="fa fa-sign-out text-white"></i>
+          </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

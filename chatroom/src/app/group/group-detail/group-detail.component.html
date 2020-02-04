@@ -1,0 +1,81 @@
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button *ngIf="isAssist" type="button" class="btn btn-sm btn-primary left" 
+    [routerLink]="['/group/edit', group.id]">
+    <i class="fa fa-top fa-pencil text-white"></i>edit group
+  </button>
+  <button *ngIf="isAssist" type="button" class="btn btn-sm btn-danger left" 
+    (click)="deleteGroup(group.id)">
+    <i class="fa fa-top fa-trash text-white"></i>delete group
+  </button>
+</div>
+<br/>
+
+<div class="container">
+  <i class="fa fa-hdr fa-comments text-warning"></i>
+  <h1 name="group-header">{{group.groupname}}</h1>
+  <h4>{{group.description}}</h4>
+  <h6>Group administrator: {{group.groupadminidname}}</h6>
+
+  <div class="row">
+
+    <div class="col-sm-12 col-md-4">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-light">
+          <h4>Group Assistants</h4>
+        </div>
+        
+        <div class="card-body chat">
+          <div *ngFor="let g of group.groupassists" class="px-1 member">
+            <img class="user-icon-sm member-icon" src="{{g.userimagepath}}"/>
+            <span class="user-icon-text member-text">{{g.useridname}}</span>
+            <button *ngIf="isAssist" 
+            class="btn btn-danger btn-sm fa-sm member-btn" 
+              (click)="deleteGroupAssist(g.id)">
+            <i class="fa fa-minus text-white"></i></button>
+          </div>  
+
+          <div class="minor-input" *ngIf="isAssist">
+            <label for="groupname" class="col-form-label">Add Group Assistant:</label>
+            <input [(ngModel)]="assisttextentry" name="userenter" class="form-control"
+              placeholder=" . . . enter new user name">
+            <select class="form-control" [(ngModel)]="assistuserselect" name="userselect">
+              <option value="">. . . or select</option>
+              <option *ngFor="let user of userselect" value="{{user.id}}">{{user.username}}</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-light col-12" (click)="addUser()">
+              <i class="fa fa-plus-circle text-dark p-0"></i></button>
+          </div>
+        </div>    
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8">
+      <div class="card border-primary mb-3">
+        <div class="card-header bg-light">
+          <h4>Channels</h4>
+        </div>
+
+        <div class="card-body">
+          <ul *ngFor="let c of group.channels">
+            <dd [routerLink]="['/channel', {id:c.id, groupid:group.id, groupadminid:group.groupadminid, isassist:isAssist,
+            groupassists:group.groupassists}]" class="link">
+            <i class="fa fa-microphone text-info"></i>{{c.channelname}}</dd>
+          </ul>
+
+          <div class="minor-input" *ngIf="isAssist">
+            <label for="channelname" class="col-form-label">Add Channel:</label>
+            <input [(ngModel)]="newchannelname" name="newchannelname" 
+            class="form-control" value=". . . new channel">
+            <button type="submit" class="btn btn-sm btn-light col-12" (click)="addChannel()">
+            <i class="fa fa-plus-circle text-dark p-0"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+</div> <!-- end container div -->

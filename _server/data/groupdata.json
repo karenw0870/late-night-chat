@@ -1,0 +1,125 @@
+[
+  {
+    "groupadmin":"Jake",
+    "groupname":"Jakes chat",
+    "description":"RAEME",
+    "channels":
+    [
+      {
+        "channelname":"Basic Training",
+        "members":
+        [
+          {
+            "username":"Karen"
+          },
+          {
+            "username":"Penny"
+          }
+        ],
+        "messages":[]
+      },
+      {
+        "channelname":"The Cavalry rides Tanks",
+        "members":
+        [
+          {
+            "username":"Dean"
+          }
+        ],
+        "messages":[]
+      },
+      {
+        "channelname":"Polly added this one",
+        "members":
+        [
+          {
+            "username":"Benny"
+          }
+        ],
+        "messages":[]
+      }
+    ],
+    "groupassists":
+    [
+      {
+        "username":"LucyLoo"
+      }
+    ]
+  },
+  {
+    "groupadmin":"Erica", 
+    "groupname":"Ericas chat",
+    "description":"A discussion about Canada",
+    "channels": 
+    [
+      {
+        "channelname":"Lets chat Whistler", 
+        "members": [],
+        "messages": []
+      },
+      {
+        "channelname":"The wonder of Banff",
+        "members": 
+        [
+          {
+            "username":"Jake"
+          }
+        ],
+        "messages": 
+        [
+        ]
+      }
+    ],
+    "groupassists": 
+    [
+    ]
+  },
+  {
+    "groupadmin":"Dean",
+    "groupname":"Deans chat",
+    "description":"Juggling work and uni",
+    "channels":
+    [
+      {
+        "channelname":"When work calls",
+        "members": [],
+        "messages": []
+      },
+      {
+        "channelname":"Assignment cramming",
+        "members": [],
+        "messages": []
+      }
+    ],
+    "groupassists":[]
+  },
+  {
+    "groupadmin":"Edan",
+    "groupname":"Edans chat",
+    "description":"Life at the Top",
+    "channels":
+    [
+      {
+        "channelname":"Making the Aussie Team",
+        "members": 
+        [
+          {
+            "username":"Erica"
+          }
+        ],
+        "messages": []
+      },
+      {
+        "channelname":"Falling off hurts",
+        "members": [],
+        "messages": []
+      },
+      {
+        "channelname":"Top of the Podium",
+        "members": [],
+        "messages": []
+      }
+    ],
+    "groupassists":[]
+  }
+]

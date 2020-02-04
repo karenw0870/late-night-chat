@@ -1,0 +1,67 @@
+<div class="row">
+    <div class="col-8">
+      <h1>Dashboard</h1>
+      <span *ngIf="currUserId"><h4>Gidday {{currUsername}}</h4></span>
+    </div>
+    <div class="col-4">
+        <img src="{{imagepath}}" class="point user-icon-lg" [routerLink]="['/user/detail', currUserId]"/>
+    </div>
+</div>
+
+<div class="row mx-1">
+  <div class="col-3 center">
+    <div class="btn-group-vertical full" data-toggle="buttons">
+      <button *ngIf="!superLogin" type="button" name="my-account-btn" class="btn btn-primary left py-3" 
+      [routerLink]="['/user/detail', currUserId]">
+        <i class="fa fa-id-badge text-white"></i>my account
+      </button>
+
+      <button *ngIf="isGroup" type="button" name="add-group-btn" class="btn btn-primary left py-3" routerLink="/group/edit">
+        <i class="fa fa-plus-circle text-white"></i>add group
+      </button>
+      <!-- fa-quote-left  fa-comment -->
+      <button type="button" *ngIf="isGroup" name="add-user-btn" class="btn btn-primary left py-3" routerLink="/user/edit">
+        <i class="fa fa-user-plus text-white"></i>add user
+      </button>
+      <button *ngIf="isSuper" type="button" name="manage-users-btn" class="btn btn-primary left py-3" routerLink="/user">
+        <i class="fa fa-users text-white"></i>manage users
+      </button>
+    </div>
+  </div>
+
+  <div class="col-9">
+      <div *ngFor="let group of groups">
+          <div class="card border-warning card-text mb-3">
+              <div class="card-header bg-warning">
+                <div class="row">
+                  <div class="col-9">
+                      <a [routerLink]="['/group/detail', group.id]"><h4 class="card-title text-dark">{{group.groupname}}</h4></a>
+                      <p class="header-text">{{group.description}}</p>
+                      <p>Administrator: {{group.groupadminidname}}</p>
+                  </div> 
+                  <div class="col-3 right">
+                      <button type="button" 
+                      class="btn right" [routerLink]="['/group/detail', group.id]">
+                      <i class="fa fa-lg fa-comments text-white"></i>
+                    </button>
+                  </div>
+                </div>
+                
+              </div>
+              
+              <div class="card-body">
+                <h5 class="card-title">Current chats</h5>
+                <ul *ngFor="let channel of group.channels">
+                  <li class="card-text">{{channel.channelname}}</li>
+                </ul>
+                <p class="card-text"></p>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>
+
+
+
+
+

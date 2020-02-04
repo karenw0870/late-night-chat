@@ -1,0 +1,116 @@
+
+<div class="btn-group" data-toggle="buttons">
+  <button type="button" class="btn btn-sm btn-primary left" routerLink="/dashboard">
+    <i class="fa fa-top fa-chevron-circle-left text-white"></i>dashboard
+  </button>
+  <button type="button" class="btn btn-sm btn-primary left" 
+    [routerLink]="['/group/detail', groupid]">
+    <i class="fa fa-top fa-chevron-left text-white"></i>group
+  </button>
+  <div *ngIf="isSuper || groupadminid == currUserId" >
+    <button type="button" class="btn btn-sm btn-primary left" 
+      (click)="editChannel()">
+      <i class="fa fa-top fa-pencil text-white"></i>update channel
+    </button>
+    <button type="button" class="btn btn-sm btn-danger left" 
+      (click)="deleteChannel()">
+      <i class="fa fa-top fa-trash text-white"></i>delete channel
+    </button>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <h1>{{channel.channelname}}</h1>
+  <h4>{{channel.description}}</h4>
+
+  <div *ngIf="editchannel" class="card border-primary mb-3 p-3">
+    <div class="">
+      <label for="updatechannel" class="form-label right">Change channel name:</label>
+    </div>
+    <div class="form-group ">
+      <input type="text" [(ngModel)]="updatechannel" name="updatechannel" class="form-control">
+    </div>
+    <div class="center">
+      <button class="btn btn-success" (click)="saveChannel()">save</button>
+      <button class="btn btn-secondary" (click)="cancelEdit()">cancel</button>
+    </div>
+  </div>
+
+  <!-- ACTIVE USERS -->
+  <div class="active-list">
+    <div class="active-list-members">
+      <span *ngFor="let u of currusers">
+        <div class="active-list-member">
+          <img class="user-icon-sm" src="{{u.image}}">
+          <span class="message active-list-name">{{u.name}}</span>
+        </div>
+      </span>
+    </div>
+  </div>
+
+  <div class="row mx-2">
+    <!-- MEMBERS -->
+    <div class="col-4">
+      <div class="card border-info b-2 mb-3">
+        <div class="card-header bg-info">
+          <h5 class="text-white">Members</h5>
+        </div>
+
+        <div class="card-body chat">
+          <div *ngFor="let m of channel.members" class="px-1 member">
+              <img class="user-icon-sm member-icon" src="{{m.userimagepath}}"/>
+              <span class="user-icon-text member-text">{{m.useridname}}</span>
+              <button *ngIf="isSuper || isGroup || isAssist" 
+              class="btn btn-danger btn-sm fa-sm member-btn" 
+              (click)="deleteChannelMember(m.id)">
+              <i class="fa fa-minus text-white"></i></button>
+          </div>
+
+          <div class="minor-input">
+            <label for="channelmember" class="col-form-label">Add Member:</label>
+            <select class="form-control" [(ngModel)]="memberuserselect" name="memberuserselect">
+              <option value="0" *ngIf="isGroup">. . . or select</option>
+              <option value="0" *ngIf="!isGroup">. . . select</option>
+              <option *ngFor="let user of userselect" value="{{user.id}}">{{user.username}}</option>
+            </select>
+            <button type="submit" class="btn btn-sm btn-light col-12" (click)="addChannelMember()">
+              <i class="fa fa-plus-circle text-dark p-0"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="col-8">
+      <div class="card border-primary mb-3">
+
+        <div class="card-header bg-light">
+          <h5>{{countmembers}} Active Members</h5>
+          <div class="msg-hdr">
+            <textarea class="msg-text" id="description" name="description"
+            rows="3" [(ngModel)]="newmessage" placeholder=" . . . message"></textarea>
+            <button type="submit" class="btn btn-sm btn-dark msg-btn" (click)="sendMessage()">
+                <i class="fa fa-comment text-light"></i></button>
+          </div>
+          <span class="text-info">* {{channelnote}}</span>
+        </div>
+
+        <div class="card-body chat">       
+          <div *ngFor="let m of messages" class="chat-row">
+            <div class="chat-icon">
+              <img class="user-icon-sm chat-img" src="{{m.userimagepath}}">
+            </div>
+            <div class="chat-message">
+              <span class="message">{{m.content}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
